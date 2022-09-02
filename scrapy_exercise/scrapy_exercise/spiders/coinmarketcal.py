@@ -12,6 +12,7 @@ class CourtScraper(scrapy.Spider):
     rows = response.xpath("/html/body/main/section[1]/div[2]/div[3]/article")
     for i in range(1,len(rows)):
       yield{
+        'event_host': rows[i].xpath('div/div/h5/a/text()').get(),
         'event_date': rows[i].xpath('div/div/a/h5[1]/text()').get(),
         'event_name': rows[i].xpath('div/div/a/h5[2]/text()').get(),
         'event_description': rows[i].xpath('div/div/div/p/text()').get().strip().replace('"',"")
