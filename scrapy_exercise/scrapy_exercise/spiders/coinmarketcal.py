@@ -16,8 +16,8 @@ class CourtScraper(scrapy.Spider):
         'event_name': rows[i].xpath('div/div/a/h5[2]/text()').get(),
         'event_description': rows[i].xpath('div/div/div/p/text()').get().strip().replace('"',"")
       }
-    """
-    next_page = response.xpath('//a[contains(text(), "Next")]')
+
+    next_page = response.xpath('//a[contains(text(), ">")]')
     if next_page is not None:
-      yield response.follow( response.xpath('//a[contains(text(), "Next")]').attrib['href'], callback=self.parse)
-      """
+      yield response.follow( response.xpath('//a[contains(text(), ">")]').attrib['href'], callback=self.parse)
+      
